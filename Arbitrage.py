@@ -44,11 +44,8 @@ def bfs():
 
         #     continue
         if name == 'tokenB' and amount > 20.0:
-            for x, y in liq.items():
-                print(x, y)
             ans_path, ans_amount = path, amount
             return ans_path, ans_amount
-            # return path, amount
 
         amount *= 0.997
 
@@ -75,37 +72,6 @@ def bfs():
 
     # print(dic)
     # return dic
-
-def dfs(path, token_amount, current_liquidity, prev=None):
-    print('path', path, 'token_amount', token_amount, 'current_liquidity', current_liquidity)
-
-    if path[-1] == 'tokenB' and token_amount > 25.0:
-        print('-' * 100)
-        print(path, token_amount)
-        print('-' * 100)
-        return
-
-    for (a, b), (liq_a, liq_b) in current_liquidity.items():
-        print('a', a, 'b', b, 'liq_a', liq_a, 'liq_b', liq_b)
-        k = liq_a * liq_b
-        if a == path[-1]:
-            if token_amount > liq_a or b == prev:
-                continue
-            new_liq_b = k / (liq_a + token_amount)
-            current_liquidity[(a, b)] = (liq_a + token_amount, new_liq_b)
-            dfs(path + [b], liq_b - new_liq_b, current_liquidity, a)
-            current_liquidity[(a, b)] = (liq_a, liq_b)
-            
-        elif b == path[-1]:
-            if token_amount > liq_b or a == prev:
-                continue
-            new_liq_a = k / (liq_b + token_amount)
-            current_liquidity[(a, b)] = (new_liq_a, liq_b + token_amount)
-            dfs(path + [a], liq_a - new_liq_a, current_liquidity, b)
-            current_liquidity[(a, b)] = (liq_a, liq_b)
-
-
-    pass
 
 def main():
     path, amount = bfs()

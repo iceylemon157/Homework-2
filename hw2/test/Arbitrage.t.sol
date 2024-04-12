@@ -86,16 +86,7 @@ contract Arbitrage is Test {
 		pairAddress[2] = address(tokenD);
 		pairAddress[3] = address(tokenC);
 		pairAddress[4] = address(tokenB);
-
-        uint[] memory amountsOut = router.getAmountsOut(5 ether, pairAddress);
-        uint[] memory amountsIn = router.getAmountsIn(amountsOut[4], pairAddress);
-
         router.swapExactTokensForTokens(5 ether, 0, pairAddress, arbitrager, block.timestamp);
-
-
-        for (uint i = 0; i < 5; i++) {
-            console.log("[%s]: %s %s", i, amountsIn[i], amountsOut[i]);
-        }
 
         /**
          * Please add your solution above
